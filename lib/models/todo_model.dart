@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
 enum Filter {
@@ -8,18 +10,21 @@ enum Filter {
 
 Uuid uuid = Uuid();
 
-class Todo {
-  late final String id;
-  late final String desc;
-  late final bool completed;
-  Todo({required this.id, required this.desc, required this.completed});
+class Todo extends Equatable {
+  final String id;
+  final String desc;
+  final bool completed;
+  Todo({
+    String? id,
+    required this.desc,
+    this.completed = false,
+  }) : this.id = id ?? uuid.v4();
 
+  @override
   List<Object?> get props => [id, desc, completed];
 
   @override
-  String toString() {
-    return 'Todo{id=$id, desc=$desc, completed=$completed}';
-  }
+  String toString() => 'Todo(id: $id, desc: $desc, completed: $completed)';
 
   Todo copyWith({String? id, String? desc, bool? completed}) {
     return Todo(
