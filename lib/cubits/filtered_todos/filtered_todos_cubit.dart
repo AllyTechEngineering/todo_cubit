@@ -24,33 +24,26 @@ class FilteredTodosCubit extends Cubit<FilteredTodosState> {
     required this.todoSearchCubit,
     required this.todoListCubit,
   }) : super(FilteredTodosState.initial()) {
-    todoFilterSubscription =
-        todoFilterCubit.stream.listen((TodoFilterState todoFilterState) {
+    todoFilterSubscription = todoFilterCubit.stream.listen((TodoFilterState todoFilterState) {
       setFilteredTodos();
     });
-    todoSearchSubscription =
-        todoSearchCubit.stream.listen((TodoSearchState todoSearchState) {
+    todoSearchSubscription = todoSearchCubit.stream.listen((TodoSearchState todoSearchState) {
       setFilteredTodos();
     });
-    todoListSubscription =
-        todoListCubit.stream.listen((TodoListState todoListState) {
+    todoListSubscription = todoListCubit.stream.listen((TodoListState todoListState) {
       setFilteredTodos();
     });
-  } //construtor body
+  } //constructor body
 
   void setFilteredTodos() {
     List<Todo> _filteredTodos;
 
     switch (todoFilterCubit.state.filter) {
       case Filter.active:
-        _filteredTodos = todoListCubit.state.todos
-            .where((Todo todo) => !todo.completed)
-            .toList();
+        _filteredTodos = todoListCubit.state.todos.where((Todo todo) => !todo.completed).toList();
         break;
       case Filter.completed:
-        _filteredTodos = todoListCubit.state.todos
-            .where((Todo todo) => todo.completed)
-            .toList();
+        _filteredTodos = todoListCubit.state.todos.where((Todo todo) => todo.completed).toList();
         break;
       case Filter.all:
       default:
@@ -59,9 +52,7 @@ class FilteredTodosCubit extends Cubit<FilteredTodosState> {
     } //switch
     if (todoSearchCubit.state.searchTerm.isNotEmpty) {
       _filteredTodos = _filteredTodos
-          .where((Todo todo) => todo.desc
-              .toLowerCase()
-              .contains(todoSearchCubit.state.searchTerm))
+          .where((Todo todo) => todo.desc.toLowerCase().contains(todoSearchCubit.state.searchTerm))
           .toList();
     } //if
     emit(state.copyWith(filteredTodos: _filteredTodos));

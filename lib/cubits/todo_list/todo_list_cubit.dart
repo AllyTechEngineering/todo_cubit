@@ -1,3 +1,8 @@
+///Each Cubit has the ability to output a new state via emit.
+///Exposes public methods which can be called externally to notify the cubit to change state
+/// the methods: addTodo, editTodo, toggleTodo and removeTodo
+/// each method uses emit(state.copyWith(todos: newTodos))
+
 import 'package:bloc/bloc.dart';
 import '/models/todo_model.dart';
 part 'todo_list_state.dart';
