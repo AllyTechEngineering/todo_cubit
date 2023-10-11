@@ -18,11 +18,30 @@ class ShowTodos extends StatelessWidget {
         return Divider(color: Colors.grey);
       },
       itemBuilder: (BuildContext context, int index) {
-        return Text(
-          todos[index].desc,
-          style: TextStyle(fontSize: 20.0),
+        return Dismissible(
+          background: showBackGround(0),
+          secondaryBackground: showBackGround(1),
+          key: ValueKey(todos[index].id),
+          child: Text(
+            todos[index].desc,
+            style: TextStyle(fontSize: 20.0),
+          ),
         );
       },
     );
+  } // Widget build
+
+  Widget showBackGround(int direction) {
+    return Container(
+      margin: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      color: Colors.red,
+      alignment: direction == 0 ? Alignment.centerLeft : Alignment.centerRight,
+      child: Icon(
+        Icons.delete,
+        size: 20.0,
+        color: Colors.white,
+      ),
+    );
   }
-}
+} //class ShowTodos
