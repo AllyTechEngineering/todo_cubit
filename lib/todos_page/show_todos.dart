@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:todo_cubit/cubits/cubits.dart';
-// import 'package:todo_cubit/models/todo_model.dart';
+import 'package:todo_cubit/models/todo_model.dart';
 
 class ShowTodos extends StatelessWidget {
   const ShowTodos({super.key});
@@ -19,14 +20,37 @@ class ShowTodos extends StatelessWidget {
       },
       itemBuilder: (BuildContext context, int index) {
         return Dismissible(
-          background: showBackGround(0),
-          secondaryBackground: showBackGround(1),
-          key: ValueKey(todos[index].id),
-          child: Text(
-            todos[index].desc,
-            style: TextStyle(fontSize: 20.0),
-          ),
-        );
+            key: ValueKey(todos[index].id),
+            background: showBackGround(0),
+            secondaryBackground: showBackGround(1),
+            onDismissed: (_) {
+              context.read<TodoListCubit>().removeTodo(todos[index]);
+            },
+            confirmDismiss: (_) {
+              return showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Are you sure?'),
+                    content: Text('Do you really want to delete?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: Text('NO'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: Text('YES'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: TodoItem(
+              todo: todos[index],
+            ));
       },
     );
   } // Widget build
@@ -45,3 +69,26 @@ class ShowTodos extends StatelessWidget {
     );
   }
 } //class ShowTodos
+
+class TodoItem extends StatefulWidget {
+  final Todo todo;
+
+  const TodoItem({
+    Key? key,
+    required this.todo,
+  }) : super(key: key);
+
+  @override
+  State<TodoItem> createState() => _TodoItemState();
+}
+
+class _TodoItemState extends State<TodoItem> {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading:
+          Checkbox(value: widget.todo.completed, onChanged: (bool? checked) {}),
+      title: Text(widget.todo.desc),
+    );
+  } //Widget
+} //class _TodoItemState
