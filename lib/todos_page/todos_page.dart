@@ -13,6 +13,9 @@ class TodosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding:
