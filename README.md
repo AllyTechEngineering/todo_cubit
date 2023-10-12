@@ -1,4 +1,6 @@
 # Checklist Creation App 
+Template for use case where a list of data needs to be displayed and categorized.
+Will refactor to use local data storage.
 ## Uses Bloc with emphasis on StreamSubscription with Cubits
 - the app has computed states and independent states
 - States and Cubits
