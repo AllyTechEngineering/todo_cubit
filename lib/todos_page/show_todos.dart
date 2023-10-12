@@ -20,37 +20,38 @@ class ShowTodos extends StatelessWidget {
       },
       itemBuilder: (BuildContext context, int index) {
         return Dismissible(
-            key: ValueKey(todos[index].id),
-            background: showBackGround(0),
-            secondaryBackground: showBackGround(1),
-            onDismissed: (_) {
-              context.read<TodoListCubit>().removeTodo(todos[index]);
-            },
-            confirmDismiss: (_) {
-              return showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text('Are you sure?'),
-                    content: Text('Do you really want to delete?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, false),
-                        child: Text('NO'),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, true),
-                        child: Text('YES'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            child: TodoItem(
-              todo: todos[index],
-            ));
+          key: ValueKey(todos[index].id),
+          background: showBackGround(0),
+          secondaryBackground: showBackGround(1),
+          onDismissed: (_) {
+            context.read<TodoListCubit>().removeTodo(todos[index]);
+          },
+          confirmDismiss: (_) {
+            return showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Are you sure?'),
+                  content: Text('Do you really want to delete?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: Text('NO'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: Text('YES'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: TodoItem(
+            todo: todos[index],
+          ),
+        );
       },
     );
   } // Widget build
@@ -149,7 +150,7 @@ class _TodoItemState extends State<TodoItem> {
             context.read<TodoListCubit>().toggleTodo(widget.todo.id);
           }),
       title: Text(widget.todo.desc),
-      subtitle: Text('Task: ${widget.todo.id}'),
+      // subtitle: Text('Task: ${widget.todo.id}'),
     );
   } //Widget
 } //class _TodoItemState

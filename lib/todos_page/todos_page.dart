@@ -14,7 +14,31 @@ class TodosPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          
+          leading: IconButton(
+            icon: const Icon(
+              Icons.description_outlined,
+              // color: Colors.white,
+            ),
+            // iconSize: 40.0,
+            onPressed: () {},
+          ),
+          centerTitle: true,
+          // backgroundColor: Colors.blueAccent,
+          title: const FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Boating Check List',
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.settings,
+                // color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -24,7 +48,9 @@ class TodosPage extends StatelessWidget {
               children: [
                 TodoHeader(),
                 CreateTodo(),
-                SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 SearchAndFilterTodo(),
                 ShowTodos(),
               ],

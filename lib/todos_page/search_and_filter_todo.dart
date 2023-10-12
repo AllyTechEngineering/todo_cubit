@@ -13,7 +13,7 @@ class SearchAndFilterTodo extends StatelessWidget {
       children: [
         TextField(
           decoration: InputDecoration(
-            labelText: 'Search todos...',
+            labelText: 'Search checklist',
             border: InputBorder.none,
             filled: true,
             prefixIcon: Icon(Icons.search),

@@ -22,7 +22,7 @@ class _CreateTodoState extends State<CreateTodo> {
   Widget build(BuildContext context) {
     return TextField(
       controller: newTodoController,
-      decoration: InputDecoration(labelText: 'What to do?'),
+      decoration: InputDecoration(labelText: 'Enter Checklist Item'),
       onSubmitted: (String? todoDesc) {
         if (todoDesc != null && todoDesc.trim().isNotEmpty) {
           context.read<TodoListCubit>().addTodo(todoDesc);

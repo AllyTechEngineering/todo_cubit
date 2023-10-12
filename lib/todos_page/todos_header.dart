@@ -8,11 +8,11 @@ class TodoHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          'TODO',
-          style: TextStyle(fontSize: 40.0),
+          'Checklist:',
+          style: TextStyle(fontSize: 30.0),
         ),
         // BlocBuilder<ActiveTodoCountCubit, ActiveTodoCountState>(
         //   builder: (context, state) {
@@ -23,7 +23,7 @@ class TodoHeader extends StatelessWidget {
         //   },
         // ),
         Text('${context.watch<ActiveTodoCountCubit>().state.activeTodoCount} items left',
-          style: TextStyle(fontSize: 30.0, color: Colors.redAccent),
+          style: TextStyle(fontSize: 30.0, color: Color.fromARGB(255, 255, 68, 109)),
         ),
       ],
     );
